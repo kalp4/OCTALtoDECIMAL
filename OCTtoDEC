@@ -1,0 +1,92 @@
+/*
+ * NAME = KALP PATEL
+ * Class = 12th A
+ * Roll No = 17
+ * School: SGVP International School
+ */
+
+
+import java.util.Scanner;
+
+public class OtoD {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        System.out.print("ENTER ROW SIZE M=");
+        int M = in.nextInt();
+        System.out.print("ENTER COLUMN SIZE N=");
+        int N = in.nextInt();
+        
+        // Check boundaries: M > 0 and M < 10, N > 2 and N < 6
+        if (M <= 0 || M >= 10 || N <= 2 || N >= 6) {
+            System.out.println("OUT OF RANGE");
+            return; 
+        }
+        
+        int[][] mat = new int[M][N];
+        
+        for (int i = 0; i < M; i++) {
+            System.out.print("ENTER ELEMENTS FOR ROW " + (i + 1) + ": ");
+            for (int j = 0; j < N; j++) {
+                mat[i][j] = in.nextInt();
+                
+                // Digits must be strictly between 0 and 7
+                if (mat[i][j] < 0 || mat[i][j] > 7) {
+                    System.out.println("INVALID INPUT");
+                    return; 
+                }
+            }
+        }
+        
+        System.out.println("FILLED MATRIX   DECIMAL EQUIVALENT");
+        for (int i = 0; i < M; i++) {
+            int octal = 0; 
+            for (int j = 0; j < N; j++) {
+                System.out.print(mat[i][j] + " ");
+                
+                // Horner's Method: Multiply by 8 and add the current digit
+                octal = octal * 8 + mat[i][j];
+            }
+            System.out.println("      " + octal);
+        }
+    }
+
+    /*
+    +-------------------------------------------------------------------------+
+    |                       VARIABLE DESCRIPTION TABLE                        |
+    +---------------+-----------+---------------------------------------------+
+    | Variable Name | Data Type | Description / Purpose                       |
+    +---------------+-----------+---------------------------------------------+
+    | in            | Scanner   | Object used to accept input from the console|
+    | M             | int       | Stores the number of rows of the matrix     |
+    | N             | int       | Stores the number of columns of the matrix  |
+    | mat           | int[][]   | 2D array to store the digits (0-7)          |
+    | i             | int       | Loop control variable for iterating rows    |
+    | j             | int       | Loop control variable for iterating columns |
+    | octal         | int       | Stores the calculated decimal equivalent of |
+    |               |           | the octal row using Horner's method         |
+    +---------------+-----------+---------------------------------------------+
+    */
+}
+
+/*
+ * Step 1: Start.
+
+(Phase 1: Setup & Validation)
+Step 2: Accept the row size into variable M and column size into variable N.
+Step 3: Check if M is outside the range 1-9 OR N is outside the range 3-5.
+Step 4: If they are out of range, print "OUT OF RANGE" and go to Step 12 (Stop).
+Step 5: Declare a 2D integer array (matrix) of size M x N.
+
+(Phase 2: Matrix Input)
+Step 6: Loop through the matrix row by row to accept the elements from the user.
+Step 7: Check if any entered digit is less than 0 or greater than 7.
+Step 8: If an invalid digit is found, print "INVALID INPUT" and go to Step 12 (Stop).
+
+(Phase 3: Calculation & Output)
+Step 9: Print the headings "FILLED MATRIX" and "DECIMAL EQUIVALENT".
+Step 10: Loop through each row again and initialize a variable octal = 0.
+Step 11: Loop through the columns of that row to print each digit, and calculate its decimal value using the formula: octal = (octal * 8) + digit.
+Step 12: Print the final octal value at the end of the row.
+Step 13: Stop.
+ */
