@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class CircularPrime {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        System.out.print("N = ");
+        String s = in.next(); // Read as String to make shifting easy
+        int n = Integer.parseInt(s);
+        
+        if (n <= 0) {
+            System.out.println("INVALID INPUT");
+            return;
+        }
+        
+        int len = s.length();
+        boolean isCirc = true;
+        
+        System.out.println("OUTPUT:");
+        
+        // Loop runs exactly 'len' times to generate all cyclic shifts
+        for (int i = 0; i < len; i++) {
+            System.out.println(s);
+            int num = Integer.parseInt(s); // Convert shifted string back to number
+            
+            // Standard Prime Check inline
+            int factors = 0;
+            for (int j = 1; j <= num; j++) {
+                if (num % j == 0) factors++;
+            }
+            
+            // If any permutation is not prime, update the flag (but keep printing)
+            if (factors != 2) isCirc = false;
+            
+            // The Memory Hack: Shift the digits by moving the 1st char to the end!
+            s = s.substring(1) + s.charAt(0);
+        }
+        
+        if (isCirc) 
+            System.out.println(n + " IS A CIRCULAR PRIME.");
+        else 
+            System.out.println(n + " IS NOT A CIRCULAR PRIME.");
+    }
+    
+    /*
+    +-------------------------------------------------------------------------+
+    |                       VARIABLE DESCRIPTION TABLE                        |
+    +---------------+-----------+---------------------------------------------+
+    | Variable Name | Data Type | Description / Purpose                       |
+    +---------------+-----------+---------------------------------------------+
+    | in            | Scanner   | Object to read inputs from console          |
+    | s             | String    | Stores the number as a string for shifting  |
+    | n             | int       | Stores the original number entered          |
+    | len           | int       | Stores the number of digits in the input    |
+    | isCirc        | boolean   | Flag tracking if all cyclic shifts are prime|
+    | i             | int       | Loop counter for generating cyclic shifts   |
+    | num           | int       | Integer value of the current shifted string |
+    | factors       | int       | Counts the factors of 'num' to check prime  |
+    | j             | int       | Loop counter used to divide 'num'           |
+    +---------------+-----------+---------------------------------------------+
+    */
+}

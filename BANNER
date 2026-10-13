@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class Banner {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        System.out.print("N = ");
+        int n = in.nextInt();
+        in.nextLine(); // Clear the hidden newline character
+        
+        // RULE: N must be strictly between 2 and 9
+        if (n <= 2 || n >= 9) {
+            System.out.println("INVALID INPUT");
+            return;
+        }
+        
+        String[] t = new String[n];
+        int max = 0; 
+        
+        // Input phase AND finding the longest word at the same time
+        for (int i = 0; i < n; i++) {
+            System.out.print("Team " + (i + 1) + ": ");
+            t[i] = in.nextLine();
+            if (t[i].length() > max) max = t[i].length();
+        }
+        
+        System.out.println("OUTPUT:");
+        
+        // Print vertically
+        for (int i = 0; i < max; i++) {
+            for (int j = 0; j < n; j++) {
+                // The Memory Hack: 1-line Ternary Operator
+                // "If letter exists, print letter. Else, print a blank space."
+                System.out.print((i < t[j].length() ? t[j].charAt(i) : ' ') + "\t");
+            }
+            System.out.println();
+        }
+    }
+    
+    /*
+    +-------------------------------------------------------------------------+
+    |                       VARIABLE DESCRIPTION TABLE                        |
+    +---------------+-----------+---------------------------------------------+
+    | Variable Name | Data Type | Description / Purpose                       |
+    +---------------+-----------+---------------------------------------------+
+    | in            | Scanner   | Object to read inputs from console          |
+    | n             | int       | Stores the total number of teams            |
+    | t             | String[]  | 1D Array storing the names of the teams     |
+    | max           | int       | Stores the length of the longest team name  |
+    | i             | int       | Loop counter for rows (characters in name)  |
+    | j             | int       | Loop counter for columns (each team)        |
+    +---------------+-----------+---------------------------------------------+
+    */
+}
